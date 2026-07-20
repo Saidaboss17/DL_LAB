@@ -57,11 +57,7 @@ The `.tex` file expects the images folder alongside it as `images/` — rename `
 pdflatex Experiment_1.tex
 ```
 
-## To Do
 
-- [ ] Learning rate comparison (`η = 0.001, 0.01, 0.1`) — Additional Task 3
-- [ ] Plot interpretations (Section 8.6 of the report)
-- [ ] Discussion of Additional Tasks 1, 2, 4, 5 (activation function comparison, sklearn comparison, XOR problem, normalization effects)
 
 ## References
 
