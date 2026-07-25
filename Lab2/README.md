@@ -1,81 +1,49 @@
-# DL_LAB — Deep Learning Laboratory
+# Experiment 2 — Multi-Layer Perceptron (MLP) for Multi-Class Image Classification
 
-Coursework repository for **CS3807 – Deep Learning Laboratory**, B.Tech Artificial Intelligence & Data Science, Shiv Nadar University Chennai.
+CS3807 – Deep Learning Laboratory, B.Tech Artificial Intelligence & Data Science, Shiv Nadar University Chennai.
 
-Contains lab experiments implementing core neural network concepts from scratch and with TensorFlow/Keras and scikit-learn, along with the corresponding lab reports.
+## Objective
 
----
+Implement a Multi-Layer Perceptron using TensorFlow/Keras for multi-class image classification on the **Fashion-MNIST** dataset, covering image preprocessing, model construction, training, evaluation, and automated hyperparameter optimization.
 
-## Repository Structure
+## Dataset
 
-```
-DL_LAB/
-├── Experiment_1_Perceptron/
-│   ├── exp_1_deep_learning.ipynb
-│   └── Experiment_1_Report.tex
-├── Experiment_2_MLP/
-│   ├── Experiment_2_Implementation_of_a_Multi_Layer_Perceptron.ipynb
-│   ├── Experiment_2.tex
-│   └── figures/
-└── README.md
-```
+- **Fashion-MNIST**: 60,000 training images, 10,000 testing images, 10 classes, 28×28 grayscale.
+- Classes: T-shirt/Top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, Sneaker, Bag, Ankle Boot.
 
-> Adjust the folder/file names above to match your actual repo layout if they differ.
+## Contents
 
----
+- **Preprocessing:** flattening 28×28 images to 784-length vectors, pixel normalization to [0,1], one-hot label encoding.
+- **Baseline model:** `Dense(128, ReLU) → Dense(64, ReLU) → Dense(10, Softmax)`, compiled with Adam and categorical cross-entropy, trained for 20 epochs (batch size 32).
+- **Evaluation:** accuracy, precision, recall, F1-score, confusion matrix, and per-class classification report.
+- **Hyperparameter optimization:**
+  - Keras Tuner (`RandomSearch`) over hidden layers, neurons, activation, dropout, learning rate, and optimizer.
+  - scikit-learn `RandomizedSearchCV` with cross-validation over an `MLPClassifier`, followed by retraining the best configuration and evaluating it on the test set.
+- **Comparison:** baseline vs. optimized model performance and training time.
 
-## Experiment 1 — Perceptron Learning Algorithm
+## Key Results
 
-**Objective:** Implement the perceptron learning algorithm from scratch and study its behaviour on both a real dataset and classic logic gates.
+| Metric      | Baseline (TensorFlow MLP) | Optimized (scikit-learn MLP) |
+|-------------|---------------------------|-------------------------------|
+| Accuracy    | 0.8844                    | 0.8778                        |
+| Precision   | 0.8836                    | 0.8792                        |
+| Recall      | 0.8844                    | 0.8778                        |
+| F1-score    | 0.8835                    | 0.8778                        |
 
-**Contents:**
-- Binary classification on the **Banknote Authentication** dataset (variance, skewness, curtosis, entropy → authentic/forged), including EDA, correlation analysis, train/test split, feature scaling, and evaluation (accuracy, precision, recall, F1, confusion matrix).
-- Effect of learning rate on convergence speed.
-- From-scratch perceptron vs. scikit-learn's `Perceptron`.
-- **Logic gates (AND, OR, NOT):** weights logged after every individual update, with the decision boundary plotted at each step until convergence.
-- **XOR gate:** demonstrates that a single-layer perceptron cannot learn a non-linearly-separable function — the weight vector is shown to enter a repeating cycle instead of converging, with an explicit pattern analysis of why.
-
-**Key result:** AND, OR, and NOT converge in a handful of updates; XOR never converges and instead cycles through a fixed set of weight states indefinitely, illustrating the perceptron convergence theorem's requirement of linear separability.
-
----
-
-## Experiment 2 — Multi-Layer Perceptron (MLP) for Image Classification
-
-**Objective:** Implement an MLP using TensorFlow/Keras for multi-class image classification on **Fashion-MNIST**, then optimize it with automated hyperparameter search.
-
-**Contents:**
-- Dataset exploration and preprocessing (flattening 28×28 images to 784-length vectors, normalization, one-hot encoding).
-- MLP architecture: `Dense(128, ReLU) → Dense(64, ReLU) → Dense(10, Softmax)`, trained with Adam for 20 epochs.
-- Evaluation via accuracy, precision, recall, F1-score, confusion matrix, and per-class classification report.
-- Hyperparameter optimization with **Keras Tuner** (`RandomSearch`) and **scikit-learn's `RandomizedSearchCV`**, followed by retraining and evaluating the optimized model against the baseline.
-
-**Key result:** Baseline MLP reaches **88.44% test accuracy**. The optimized `MLPClassifier` from the completed `RandomizedSearchCV` search reached 87.78% — slightly below baseline, attributed to a smaller search budget (single hidden layer, fewer training iterations) rather than a genuinely worse configuration.
-
----
+The baseline model slightly outperforms the optimized one, most likely due to a smaller training budget in the search (single hidden layer, fewer iterations) rather than the chosen hyperparameters being genuinely worse.
 
 ## Tech Stack
 
-- Python 3
-- NumPy, Pandas
-- Matplotlib, Seaborn
-- TensorFlow / Keras, Keras Tuner
-- scikit-learn
-
----
+Python, NumPy, Pandas, Matplotlib, Seaborn, TensorFlow/Keras, Keras Tuner, scikit-learn.
 
 ## How to Run
 
-1. Open the notebook for the relevant experiment in Google Colab (or Jupyter locally).
-2. Run all cells top to bottom.
-3. Datasets are loaded directly via `tensorflow.keras.datasets` (Fashion-MNIST) or uploaded manually (Banknote Authentication `.zip`).
+1. Open `Experiment_2_Implementation_of_a_Multi_Layer_Perceptron.ipynb` in Google Colab.
+2. Run all cells top to bottom — Fashion-MNIST loads directly via `tensorflow.keras.datasets`.
 
----
+## Report
 
-## Reports
-
-Each experiment's LaTeX report (compiled with Overleaf) documents the objective, theory, methodology, full output/results, plots with inference, and discussion. See the `.tex` files in each experiment folder.
-
----
+The full LaTeX report (`Experiment_2.tex`) documents the objective, theory, methodology, complete output, all mandatory plots with inference, hyperparameter search results, and discussion.
 
 ## Author
 
