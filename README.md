@@ -5,7 +5,6 @@ Shiv Nadar University Chennai · B.Tech AI & Data Science · Semester V
 
 A controlled study of how different attention mechanisms, and *where* they are inserted, change the behaviour of an ImageNet-pretrained **ResNet50** on five-class flower classification (`tf_flowers`).
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/YOUR-NOTEBOOK-ID)
 
 ---
 
